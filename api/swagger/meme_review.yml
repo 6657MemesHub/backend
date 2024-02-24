@@ -1,0 +1,51 @@
+获取未审核烂梗
+---
+parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+        description: 鉴权密钥
+      - name: page
+        in: query
+        type: integer
+        required: true
+        description: 当前页，默认为1
+      - name: page_size
+        in: query
+        type: integer
+        required: true
+        description: 每页展示烂梗条数，默认为20
+definitions:
+  Meme:
+    type: object
+    properties:
+      id:
+        type: integer
+      content:
+        type: string
+      tags:
+        type: string
+      like:
+        type: integer
+      review:
+        type: boolean
+responses:
+  200:
+    description: 返回烂梗列表
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Meme'
+    examples:
+      application/json:
+        - id: 1
+          content: "超级大爆！"
+          tags: "fk-eachother,"
+          like: 100
+          review: false
+        - id: 2
+          content: "种族:🤡操作:🐽视力:🦐听力:🐉想法:🐷胆子:🐀嘴巴:💎"
+          tags: "fk-wjq,"
+          like: 15
+          review: false

@@ -1,0 +1,20 @@
+烂梗点赞
+---
+parameters:
+  - name: X-Forwarded-For
+    in: header
+    type: string
+    required: true
+    description: 在X-Forwarded-For后加上本次请求的烂梗id
+  - name: id
+    in: json
+    required: true
+    type: integer
+    description: 点赞的烂梗id
+responses:
+  200:
+    description: 点赞成功
+  404:
+    description: id在数据库中不存在
+  500:
+    description: 点赞失败

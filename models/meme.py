@@ -20,15 +20,6 @@ def get_meme_by_tag(tag, page, page_size):
     return memes_json
 
 
-def get_meme_review(page, page_size):
-    memes = Meme.query.filter_by(review=False).paginate(
-        page=page, per_page=page_size, error_out=False
-    )
-    memes_json = memes_schema.dumps(memes.items)
-    current_app.logger.debug(f"{memes_json}")
-    return memes_json
-
-
 def submit_meme(meme_json):
     try:
         current_app.logger.debug(f"{meme_json}")
@@ -44,5 +35,52 @@ def submit_meme(meme_json):
         db.session.add(meme)
         db.session.commit()
     except Exception as e:
-        current_app.logger.info(f"{e}")
+        current_app.logger.debug(f"{e}")
         raise e
+
+
+def like_meme(like_json):
+    id = like_json.get("id")
+    db.session.begin()
+    try:
+        meme = Meme.query.get_or_404(id)
+        meme.like += 1
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.debug(f"{e}")
+        raise e
+    finally:
+        db.session.close()
+
+
+def get_unreview_meme(page, page_size):
+    memes = Meme.query.filter_by(review=False).paginate(
+        page=page, per_page=page_size, error_out=False
+    )
+    memes_json = memes_schema.dumps(memes.items)
+    current_app.logger.debug(f"{memes_json}")
+    return memes_json
+
+
+def review_result_update(review_json):
+    id = review_json.get("id")
+    permit = review_json.get("permit")
+    db.session.begin()
+    try:
+        meme = Meme.query.get_or_404(id)
+        if permit is None:
+            raise Exception(f"invalid feild: permit={permit}")
+        if not permit:
+            db.session.delete(meme)
+            db.session.commit()
+            return False
+        meme.review = True
+        db.session.commit()
+        return True
+    except Exception as e:
+        db.session.rollback()
+        current_app.logger.debug(f"{e}")
+        raise e
+    finally:
+        db.session.close()

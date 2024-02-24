@@ -4,10 +4,12 @@ from config.setting import config_log
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
+from flask_cors import CORS
 from config import setting
 
 
 app = Flask(__name__)
+CORS(app)
 
 app.config.from_object(setting.ENV.get(os.environ.get("FLASK_ENV", "default")))
 app.config["JSON_AS_ASCII"] = False

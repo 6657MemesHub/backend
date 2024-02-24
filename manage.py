@@ -31,6 +31,5 @@ from api.routes import *
 
 init_env_path(__file__)
 config_log()
-if __name__ == "__main__":
-    app.run("0.0.0.0", 8080, debug=True)
-    app.logger.info(f"run server at port 8080")
+app.run("0.0.0.0", 8080, debug=True)
+app.logger.info(f"run server at port 8080")

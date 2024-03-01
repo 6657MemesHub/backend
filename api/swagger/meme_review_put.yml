@@ -6,6 +6,16 @@ parameters:
     required: true
     type: integer
     description: 待审核的烂梗id
+  - name: content
+    in: json
+    required: true
+    type: string
+    description: 烂梗内容，使用UTF-8编码，否则emoji会乱码
+  - name: tags
+    in: json
+    required: true
+    type: string
+    description: 烂梗tag，每个tag后使用英文逗号分隔(包括末尾)，如：fk-eachother,fk-player,
   - name: permit
     in: json
     required: true

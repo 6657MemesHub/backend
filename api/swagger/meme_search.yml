@@ -1,6 +1,11 @@
-获取烂梗
+烂梗搜索
 ---
 parameters:
+      - name: content
+        in: query
+        type: string
+        required: true
+        description: 搜索的内容，默认为""
       - name: tag
         in: query
         type: string
@@ -24,7 +29,7 @@ definitions:
         type: integer
       content:
         type: string
-      tag:
+      tags:
         type: string
       like:
         type: integer
@@ -41,11 +46,11 @@ responses:
       application/json:
         - id: 1
           content: "超级大爆！"
-          tag: "fk-eachother"
+          tags: "fk-eachother"
           like: 100
           review: true
         - id: 2
           content: "种族:🤡操作:🐽视力:🦐听力:🐉想法:🐷胆子:🐀嘴巴:💎"
-          tag: "fk-wjq"
+          tags: "fk-wjq"
           like: 15
           review: true

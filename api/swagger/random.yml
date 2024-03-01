@@ -1,0 +1,36 @@
+获取一条随机烂梗
+---
+parameters:
+      - name: tag
+        in: query
+        type: string
+        required: true
+        description: 烂梗的tag，默认为""
+definitions:
+  Meme:
+    type: object
+    properties:
+      id:
+        type: integer
+      content:
+        type: string
+      tags:
+        type: string
+      like:
+        type: integer
+      review:
+        type: boolean
+responses:
+  200:
+    description: 一条随机烂梗
+    schema:
+      type: object
+      items:
+        $ref: '#/definitions/Meme'
+    examples:
+      application/json:
+        - id: 1
+          content: "超级大爆！"
+          tags: "群魔乱舞"
+          like: 100
+          review: true

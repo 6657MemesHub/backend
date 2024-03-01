@@ -1,0 +1,18 @@
+获取烂梗总数
+---
+parameters:
+      - name: content
+        in: query
+        type: string
+        required: true
+        description: 搜索的内容，默认为""
+      - name: tag
+        in: query
+        type: string
+        required: true
+        description: 烂梗的tag，默认为""
+responses:
+  200:
+    description: 烂梗数量
+    examples:
+      fk-eachother: 1000

@@ -1,0 +1,23 @@
+获取tag
+---
+definitions:
+  Tag:
+    type: object
+    properties:
+      id:
+        type: integer
+      tag:
+        type: string
+responses:
+  200:
+    description: 返回所有Tag
+    schema:
+      type: array
+      items:
+        $ref: '#/definitions/Tag'
+    examples:
+      application/json:
+        - id: 1
+          tag: "+1"
+        - id: 2
+          tag: "ququ"

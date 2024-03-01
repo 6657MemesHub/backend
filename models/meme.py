@@ -21,22 +21,6 @@ def get_all_tag():
         raise e
 
 
-# def get_meme_by_tag(tag, page, page_size):
-#     try:
-#         if tag:
-#             memes = Meme.query.filter(Meme.tags.contains(tag)).paginate(
-#                 page=page, per_page=page_size, error_out=False
-#             )
-#         else:
-#             memes = Meme.query.paginate(page=page, per_page=page_size, error_out=False)
-#         memes_json = memes_schema.dumps(memes.items)
-#         current_app.logger.debug(f"tag: {tag}, memes: {memes_json}")
-#         return memes_json
-#     except Exception as e:
-#         current_app.logger.debug(f"{e}")
-#         raise e
-
-
 def get_meme(content, tag, page, page_size):
     try:
         if content and tag:
@@ -61,19 +45,6 @@ def get_meme(content, tag, page, page_size):
     except Exception as e:
         current_app.logger.debug(f"{e}")
         raise e
-
-
-# def get_meme_count_by_tag(tag):
-#     try:
-#         if tag:
-#             count = Meme.query.filter(Meme.tags.contains(tag)).count()
-#         else:
-#             count = Meme.query.count()
-#         current_app.logger.debug(f"get count of tag: {tag}:{count}")
-#         return count
-#     except Exception as e:
-#         current_app.logger.debug(f"{e}")
-#         raise e
 
 
 def get_meme_count(content, tag):

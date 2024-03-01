@@ -54,23 +54,6 @@ def all_tag():
     return make_response(tags, STATUSCODE.SUCCESS)
 
 
-# @app.route("/meme_by_tag", methods=[METHODTYPE.GET])
-# @limiter.limit("1 per second")
-# @swag_from("./swagger/meme_by_tag.yml")
-# def meme_by_tag():
-#     """
-#     根据tag获取烂梗
-#     """
-#     try:
-#         tag = request.args["tag"]
-#         page = int(request.args["page"])
-#         page_size = int(request.args["page_size"])
-#         memes = get_meme_by_tag(tag, page, page_size)
-#     except Exception as e:
-#         return make_response(f"{e}", STATUSCODE.FAIL)
-#     return make_response(memes, STATUSCODE.SUCCESS)
-
-
 @app.route("/meme_search", methods=[METHODTYPE.GET])
 @limiter.limit("1 per second")
 @swag_from("./swagger/meme_search.yml")
@@ -87,21 +70,6 @@ def meme_search():
     except Exception as e:
         return make_response(f"{e}", STATUSCODE.FAIL)
     return make_response(memes, STATUSCODE.SUCCESS)
-
-
-# @app.route("/meme_count_by_tag", methods=[METHODTYPE.GET])
-# @limiter.limit("1 per second")
-# @swag_from("./swagger/meme_count_by_tag.yml")
-# def meme_count_by_tag():
-#     """
-#     根据tag获取烂梗总数
-#     """
-#     try:
-#         tag = request.args["tag"]
-#         count = get_meme_count_by_tag(tag)
-#     except Exception as e:
-#         return make_response(f"{e}", STATUSCODE.FAIL)
-#     return make_response({tag: count}, STATUSCODE.SUCCESS)
 
 
 @app.route("/meme_count", methods=[METHODTYPE.GET])
